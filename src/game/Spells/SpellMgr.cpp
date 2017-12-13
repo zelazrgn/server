@@ -332,8 +332,11 @@ float CalculateCustomCoefficient(SpellEntry const *spellProto, Unit const* caste
 
                     if (Player* modOwner = caster->GetSpellModOwner())
                     {
-                        // Improved Chain Heal (T2 3/8 bonus) / Gift of the Gathering Storm Chain Lightning Bonus
-                        modOwner->ApplySpellMod(spell->m_spellInfo->Id, SPELLMOD_EFFECT_PAST_FIRST, multiplier, spell);
+                        if (spell->GetTargetNum() > 1)
+                        {
+                            // Improved Chain Heal (T2 3/8 bonus) / Gift of the Gathering Storm Chain Lightning Bonus
+                            modOwner->ApplySpellMod(spell->m_spellInfo->Id, SPELLMOD_EFFECT_PAST_FIRST, multiplier, spell);
+                        }
                     }
 
                     for (uint8 i = 1; i < spell->GetTargetNum(); ++i)
